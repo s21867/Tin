@@ -1,0 +1,42 @@
+<%- include('../../fragments/header.ejs') %>
+<main>
+  <h2><%= pageTitle%></h2>
+  <%if(buildings.length){%>
+  <div class="tabeleczka">
+    <table class="table-list">
+      <thead>
+      <tr>
+        <th><%=__('flat.fields.street')%></th>
+        <th><%=__('flat.fields.buildingNumber')%></th>
+        <th><%=__('flat.fields.flatNumber')%></th>
+        <th><%=__('list.actions.title')%></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%for (let building of buildings){%>
+      <tr>
+        <td><%=building.ulica%></td>
+        <td><%=building.numerBudynku%></td>
+        <td><%=building.numerMieszkania%></td>
+        <td>
+          <ul class="list-actions">
+            <li><a href="/Buildings/Details/<%=building.mieszkanieId%>" class="list-actions-button-details"><%=__('list.actions.details')%></a></li>
+            <li><a href="/Buildings/Edit/<%=building.mieszkanieId%>" class="list-actions-button-edit"><%=__('list.actions.edit')%></a></li>
+            <li><a href="/Buildings/Delete/<%=building.mieszkanieId%>" class="list-actions-button-delete"><%=__('list.actions.delete')%></a></li>
+          </ul>
+        </td>
+      </tr>
+      <%}%>
+      </tbody>
+    </table>
+  </div>
+  <%}else{%>
+    <p><%=__('flat.list.noData')%></p>
+  <%}%>
+  <p>
+    <a href="Buildings/add" class="button-add"><%=__('flat.list.addNew')%></a>
+  </p>
+</main>
+<%- include('../../fragments/footer.ejs') %>
+</body>
+</html>

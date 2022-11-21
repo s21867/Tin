@@ -1,0 +1,104 @@
+<%- include('../../fragments/header.ejs') %>
+<main>
+  <script type="application/javascript" src = "/js/validationClient.js"></script>
+  <script type="application/javascript" src = "/js/validationCommon.js"></script>
+  <h2><%= pageTitle%></h2>
+  <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+    <div style="display:none">
+      <span id="errorMessage-required"><%=__('form.validationMessage.fieldRequired')%></span>
+      <span id="errorMessage-clientMobilePhone"><%=__('form.validationMessage.client.mobilePhone')%></span>
+      <span id="errorMessage-clientMobilePhoneRange"><%=__('form.validationMessage.client.mobilePhoneRange')%></span>
+      <span id="errorMessage-email"><%=__('form.validationMessage.client.email')%></span>
+      <span id="errorMessage-emailRange"><%=__('form.validationMessage.client.emailRange')%></span>
+      <span id="errorMessage-nameRange"><%=__('form.validationMessage.client.nameRange')%></span>
+      <span id="errorMessage-lastNameRange"><%=__('form.validationMessage.client.lastNameRange')%></span>
+      <span id="errorMessage-Summary"><%=__('form.validationMessage.summary')%></span>
+    </div>
+    <input type="hidden" name="klientId" value="<%= m_client.klientId%>">
+    <label for="imie"><%= __('client.fields.firstName')%></label>
+    <input type="text" name="imie" id="imie" placeholder="2-20 znaków" class="<%= validationErrors.find(e=> e.path.includes('imie')) ? 'error-input' : ''%>" value="<%= m_client.imie%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorFirstName" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('imie'))){%>
+        <%= validationErrors.find(e=> e.path.includes('imie')).message%>
+      <%}%>
+    </span>
+    <label for="nazwisko"><%=__('client.fields.lastName')%></label>
+    <input type="text" name="nazwisko" id="nazwisko" placeholder="2-20 znaków" class="<%= validationErrors.find(e=> e.path.includes('nazwisko')) ? 'error-input' : ''%>" value="<%= m_client.nazwisko%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorLastName" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('nazwisko'))){%>
+        <%= validationErrors.find(e=> e.path.includes('nazwisko')).message%>
+      <%}%>
+    </span>
+    <label for="email"><%=__('client.fields.email')%></label>
+    <input type="email" name="email" id="email" placeholder="np. nazwa@domena.pl" class="<%= validationErrors.find(e=> e.path.includes('email')) ? 'error-input' : ''%>" value="<%= m_client.email%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorEmail" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('email'))){%>
+        <%= validationErrors.find(e=> e.path.includes('email')).message%>
+      <%}%>
+    </span>
+    <label for="numerTelefonu"><%=__('client.fields.telNumber')%></label>
+    <input type="tel" name="numerTelefonu" id="numerTelefonu" placeholder="np. +48 123456789" class="<%= validationErrors.find(e=> e.path.includes('numerTelefonu')) ? 'error-input' : ''%>" value="<%= m_client.numerTelefonu%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorPhone" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('numerTelefonu'))){%>
+        <%= validationErrors.find(e=> e.path.includes('numerTelefonu')).message%>
+      <%}%>
+    </span>
+    <%if (formMode === 'showDetails'){%>
+    <div class = "form-buttons">
+      <a href="/Clients/edit/<%= m_client.klientId%>" class="form-button-edit"><%=__('form.actions.edit')%></a>
+    </div>
+    <% }else{%>
+    <div class="form-buttons">
+      <p id="errorsSummary" class="errors-text"></p>
+      <input type="submit" class="form-button-submit" value="<%=btnLabel%>"/>
+      <a href="/Clients" class="form-button-cancel"><%=__('form.actions.cancel')%></a>
+    </div>
+    <%}%>
+  </form>
+  <%if(formMode === 'showDetails'){%>
+  <%if(m_client.mieszkania.length){%>
+  <h2><%=__('client.form.purchased-flats.pageTitle')%></h2>
+  <div id="tabeleczka">
+    <table  class="table-list">
+      <thead>
+      <tr>
+        <th>
+          <%=__('flat.fields.street')%>
+        </th>
+        <th>
+          <%=__('flat.fields.buildingNumber')%>
+        </th>
+        <th>
+          <%=__('flat.fields.flatNumber')%>
+        </th>
+        <th>
+          <%=__('flat.fields.devState')%>
+        </th>
+      </thead>
+      <tbody>
+      <%for (let m of m_client.mieszkania) {%>
+        <tr>
+          <td><a href="/buildings/details/<%= m.mieszkanieId%>"><%= m.ulica%></a></td>
+          <td><%= m.numerBudynku%></td>
+          <td><%= m.numerMieszkania%></td>
+          <%if(m.stanDeweloperski === 1){%>
+            <td><input type="checkbox" name="Stan_Deweloperski" id="Stan_Deweloperski" checked disabled/></td>
+          <%}else{%>
+            <td><input type="checkbox" name="Stan_Deweloperski" id="Stan_Deweloperski" disabled/></td>
+          <%}%>
+        </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </div>
+  <%}else{%>
+    <p><%=__('client.form.purchased-flats.noData')%></p>
+  <%}%>
+  <p>
+    <a href="/Clients" class="button-return"><%=__('form.actions.return')%></a>
+  </p>
+  <%}%>
+</main>
+<%- include('../../fragments/footer.ejs') %>
+</body>
+</html>

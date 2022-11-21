@@ -1,0 +1,105 @@
+<%- include('../../fragments/header.ejs') %>
+<main>
+  <script type="application/javascript" src = "/js/validationBuildingForm.js"></script>
+  <script type="application/javascript" src = "/js/validationCommon.js"></script>
+  <h2><%= pageTitle%></h2>
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+      <div style="display:none">
+        <span id="errorMessage-summary"><%=__('form.validationMessage.summary')%></span>
+        <span id="errorMessage-required"><%=__('form.validationMessage.fieldRequired')%></span>
+        <span id="errorMessage-streetRange"><%=__('form.validationMessage.flat.streetRange')%></span>
+        <span id="errorMessage-buildingRange"><%=__('form.validationMessage.flat.buildingRange')%></span>
+        <span id="errorMessage-buildingNumber"><%=__('form.validationMessage.flat.buildingNumber')%></span>
+        <span id="errorMessage-flatNumber"><%=__('form.validationMessage.flat.flatNumber')%></span>
+        <span id="errorMessage-flatRange"><%=__('form.validationMessage.flat.flatRange')%></span>
+        <span id="errorMessage-devState"><%=__('form.validationMessage.flat.devState')%></span>
+      </div>
+    <input type="hidden" name="mieszkanieId" value="<%= mieszkanie.mieszkanieId%>">
+    <label for="ulica"><%=__('flat.fields.street')%></label>
+    <input type="text" name="ulica" id="ulica" class="<%= validationErrors.find(e=> e.path.includes('ulica')) ? 'error-input' : ''%>" value="<%= mieszkanie.ulica%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorStreet" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('ulica'))){%>
+        <%= validationErrors.find(e=> e.path.includes('ulica')).message%>
+      <%}%>
+    </span>
+    <label for="numerBudynku"><%=__('flat.fields.buildingNumber')%></label>
+    <input type="text" name="numerBudynku" id="numerBudynku" class="<%= validationErrors.find(e=> e.path.includes('numerBudynku')) ? 'error-input' : ''%>" value="<%= mieszkanie.numerBudynku%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorBuilding" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('numerBudynku'))){%>
+        <%= validationErrors.find(e=> e.path.includes('numerBudynku')).message%>
+      <%}%>
+    </span>
+    <label for="numerMieszkania"><%=__('flat.fields.flatNumber')%></label>
+    <input type="text" name="numerMieszkania" id="numerMieszkania" class="<%= validationErrors.find(e=> e.path.includes('numerMieszkania')) ? 'error-input' : ''%>" value="<%= mieszkanie.numerMieszkania%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorFlat" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('numerMieszkania'))){%>
+        <%= validationErrors.find(e=> e.path.includes('numerMieszkania')).message%>
+      <%}%>
+    </span>
+    <label for="stanDeweloperski"><%=__('flat.fields.devState')%></label>
+    <%if(mieszkanie.stanDeweloperski === 1){%>
+      <td><input type="checkbox" name="stanDeweloperski" id="stanDeweloperski" class="<%= validationErrors.find(e=> e.path.includes('stanDeweloperski')) ? 'error-input' : ''%>" checked <%= (formMode == 'showDetails') ? 'disabled' : ''%>/></td>
+    <%}else{%>
+      <td><input type="checkbox" name="stanDeweloperski" id="stanDeweloperski" class="<%= validationErrors.find(e=> e.path.includes('stanDeweloperski')) ? 'error-input' : ''%>" <%= (formMode == 'showDetails') ? 'disabled' : ''%>/></td>
+    <%}%>
+    <span id="devStateError" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('stanDeweloperski'))){%>
+        <%= validationErrors.find(e=> e.path.includes('stanDeweloperski')).message%>
+      <%}%>
+    </span>
+      <%if (formMode === 'showDetails'){%>
+        <div class = "form-buttons">
+          <a href="/Buildings/edit/<%=mieszkanie.mieszkanieId%>" class="form-button-edit"><%=__('form.actions.edit')%></a>
+        </div>
+      <% }else{%>
+      <div class="form-buttons">
+        <p id="errorsSummary" class="errors-text"></p>
+        <input type="submit" class="form-button-submit" value="<%=btnLabel%>"/>
+        <a href="/Buildings" class="form-button-cancel"><%=__('form.actions.cancel')%></a>
+      </div>
+      <%}%>
+  </form>
+  <%if(formMode === 'showDetails'){%>
+  <%if(mieszkanie.kupcy.length){%>
+  <h2><%=__('flat.form.buyers.pageTitle')%></h2>
+  <div id="tabeleczka">
+    <table  class="table-list">
+      <thead>
+      <tr>
+        <th>
+          <%=__('client.fields.firstName')%>
+        </th>
+        <th>
+          <%=__('client.fields.lastName')%>
+        </th>
+        <th>
+          <%=__('client.fields.email')%>
+        </th>
+        <th>
+          <%=__('client.fields.telNumber')%>
+        </th>
+
+      </thead>
+      <tbody>
+      <%for (let c of mieszkanie.kupcy) {%>
+        <tr>
+          <td><a href="/Clients/details/<%= c.klientId%>"><%= c.firstName%></a></td>
+          <td><%= c.lastName%></td>
+          <td><%= c.email%></td>
+          <td><%= c.numerTelefonu%></td>
+        </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </div>
+  <%}else{%>
+    <p><%=__('flat.form.noData')%></p>
+  <%}%>
+  <p>
+    <a href="/Buildings" class="button-return"><%=__('form.actions.return')%></a>
+  </p>
+  <%}%>
+</main>
+<%- include('../../fragments/footer.ejs') %>
+</body>
+</html>

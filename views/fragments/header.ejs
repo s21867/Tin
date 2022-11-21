@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>Historia sprzedaży mieszkań</title>
+    <%-include('login.ejs')%>
+</head>
+<body>
+    <header>
+        <h1>FROST Industries</h1>
+        <img src="/Images/logo.jfif" alt="FROST industries Logo">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/" class="<%= navLocation == 'main' ? 'active' : ''%>"><%= __('nav.main-page') %></a></li>
+            <%if(loggedUser){%>
+            <li><a href="/Buildings" class="<%= navLocation == 'build' ? 'active' : ''%>"><%= __('nav.flats') %></a></li>
+            <li><a href="/Clients" class="<%= navLocation == 'client' ? 'active' : ''%>"><%= __('nav.clients') %></a></li>
+            <li><a href="/Purchases" class="<%= navLocation == 'purch' ? 'active' : ''%>"><%= __('nav.purchase-History') %></a></li>
+            <%}%>
+        </ul>
+        <ul>
+            <li><a href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : ''%>">PL</a></li>
+            <li><a href="/changeLang/en" class="<%= lang == 'en' ? 'active' : ''%>">EN</a></li>
+        </ul>
+    </nav>

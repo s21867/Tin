@@ -1,0 +1,107 @@
+<%- include('../../fragments/header.ejs') %>
+<main>
+  <script type="application/javascript" src = "/js/validationPurchase.js"></script>
+  <script type="application/javascript" src = "/js/validationCommon.js"></script>
+  <h2><%= pageTitle%></h2>
+  <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+    <div style="display:none">
+      <span id="errorMessage-summary"><%=__('form.validationMessage.summary')%></span>
+      <span id="errorMessage-required"><%=__('form.validationMessage.fieldRequired')%></span>
+      <span id="errorMessage-client"><%=__('form.validationMessage.purchase.clientNotSelected')%></span>
+      <span id="errorMessage-flat"><%=__('form.validationMessage.purchase.flatNotSelected')%></span>
+      <span id="errorMessage-date"><%=__('form.validationMessage.purchase.date')%></span>
+      <span id="errorMessage-dateIfAfter"><%=__('form.validationMessage.purchase.dateIfAfter')%></span>
+      <span id="errorMessage-price"><%=__('form.validationMessage.purchase.price')%></span>
+      <span id="errorMessage-priceRange"><%=__('form.validationMessage.purchase.priceRange')%></span>
+    </div>
+    <%if(purchase.length){%>
+      <input type="hidden" name="purchaseId" value="<%= purchase[0].ID_Kupna%>">
+    <%}%>
+    <label for="client"><%=__('purchase.form.obligatoryFields.client')%></label>
+    <select name="client" id="client" class="<%= validationErrors.find(e=> e.path.includes('client')) ? 'error-input' : ''%>" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>>
+      <option><%=__('purchase.form.add.defaultOptions.client')%></option>
+      <% for(let i=0; i<clients.length;i++){let client = clients[i]%>
+        <option value="<%=client.klientId%>" label="<%= client.imie + ' ' + client.nazwisko%>"
+          <% if(purchaseData){%>
+              <%= (client.klientId === purchaseData.client) ? 'selected' : ''%>
+          <%}else if(purchase.length){%>
+              <%= (client.klientId == purchase[0].ID_Klient) ? 'selected' : ''%>
+          <%}%>
+          ></option>
+      <%}%>
+    </select>
+    <span id="errorClient" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('client'))){%>
+        <%= validationErrors.find(e=> e.path.includes('client')).message%>
+      <%}%>
+    </span>
+    <label for="flat"><%=__('purchase.form.obligatoryFields.flat')%></label>
+    <select name="flat" id="flat"  class="<%= validationErrors.find(e=> e.path.includes('flat')) ? 'error-input' : ''%>" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>>
+      <option><%=__('purchase.form.add.defaultOptions.flat')%></option>
+      <% for(let i=0; i<buildings.length;i++){let building = buildings[i]%>
+        <option value="<%=building.mieszkanieId%>" label="<%= building.ulica + ' ' + building.numerBudynku + ((building.numerMieszkania != null) ? '/' + building.numerMieszkania : '')%>"
+          <%if(purchaseData){%>
+                <%= (building.mieszkanieId === purchaseData.flat) ? 'selected' : ''%>
+          <%}else if(purchase.length){%>
+                <%= (building.mieszkanieId == purchase[0].ID_Mieszkanie) ? 'selected' : ''%>
+          <%}%>
+        ></option>
+      <%}%>
+    </select>
+    <span id="errorFlat" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('flat'))){%>
+        <%= validationErrors.find(e=> e.path.includes('flat')).message%>
+      <%}%>
+    </span>
+    <label for="Date"><%=__('purchase.form.obligatoryFields.date')%></label>
+
+    <input type="Date" name="DataKupna" id="DataKupna" class="<%= validationErrors.find(e=> e.path.includes('DataKupna')) ? 'error-input' : ''%>"
+          <%if(purchaseData){%>
+            <% var data=purchaseData.DataKupna%>
+            value="<%=data%>"
+          <%}else if(purchase.length){%>
+            <% var data=purchase[0].DataKupna.toISOString().split('T')[0].trim()%>
+            value="<%=data%>"
+          <%}%>
+            <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorDate" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('DataKupna'))){%>
+        <%= validationErrors.find(e=> e.path.includes('DataKupna')).message%>
+      <%}%>
+    </span>
+    <label for="Price"><%=__('purchase.form.obligatoryFields.price')%></label>
+
+    <input type="number" min="1" step="any" name="CenaKupna" id="CenaKupna" class="<%= validationErrors.find(e=> e.path.includes('CenaKupna')) ? 'error-input' : ''%>"
+          <%if(purchaseData){%>
+            <% var cena=purchaseData.CenaKupna%>
+            value="<%=cena%>"
+          <%}else if(purchase.length){%>
+            <% var cena=purchase[0].CenaKupna%>
+            value="<%=cena%>"
+          <%}%>
+           required <%= (formMode == 'showDetails') ? 'disabled' : ''%>/>
+    <span id="errorPrice" class="errors-text">
+      <% if(validationErrors.find(e=> e.path.includes('CenaKupna'))){%>
+        <%= validationErrors.find(e=> e.path.includes('CenaKupna')).message%>
+      <%}%>
+    </span>
+    <%if (formMode === 'showDetails'){%>
+      <p>
+        <span>
+            <a href="/Purchases/edit/<%=m_purchaseId%>" class="form-button-edit"><%=__('form.actions.edit')%></a>
+            <a href="/Purchases" class="button-return"><%=__('form.actions.return')%></a>
+        </span>
+      </p>
+    <% }else{%>
+    <div class="form-buttons">
+      <p id="errorsSummary" class="errors-text"></p>
+      <input type="submit" class="form-button-submit" value="<%=btnLabel%>"/>
+      <a href="/Purchases" class="form-button-cancel"><%=__('form.actions.cancel')%></a>
+    </div>
+    <%}%>
+  </form>
+
+</main>
+<%- include('../../fragments/footer.ejs') %>
+</body>
+</html>

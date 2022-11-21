@@ -1,0 +1,182 @@
+{
+	"main-page": {
+		"content": "Strona główna"
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"clients": "Klienci",
+		"flats": "Mieszkania",
+		"purchase-History": "Historia Sprzedaży"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Powrót",
+			"edit": "Edytuj",
+			"cancel": "Anuluj"
+		},
+		"validationMessage": {
+			"fieldRequired": "Pole jest wymagane",
+			"summary": "Formularz zawiera błędy",
+			"client": {
+				"mobilePhone": "numer telefonu jest niepoprawny",
+				"mobilePhoneRange": "Pole powinno zawierać od 9 do 12 znaków",
+				"email": "Adres email jest niepoprawny",
+				"emailRange": "Pole powinno zawierać od 2 do 50 znaków",
+				"nameRange": "Pole powinno zawierać od 2 do 20 znaków",
+				"lastNameRange": "Pole powinno zawierać od 2 do 20 znaków"
+
+			},
+			"flat": {
+				"streetRange": "Pole powinno zawierać od 2 do 20 znaków",
+				"buildingRange": "Pole powinno zawierać od 1 do 3 znaków",
+				"buildingNumber": "Pole musi zawierać liczbę",
+				"flatNumber": "Pole musi zawierać liczbę",
+				"flatRange": "Numer musi znajdować się w przedziale od 1 do 999",
+				"devState": "Pole musi pozostać checkboxem"
+			},
+			"purchase": {
+				"clientNotSelected": "Proszę wybrać klienta",
+				"flatNotSelected": "Proszę wybrać mieszkanie",
+				"date": "Pole powinno zawierać datę w formacie yyyy-MM-dd",
+				"dateIfAfter": "Data nie może być z przyszłości",
+				"price": "Proszę wprowadzić poprawną cenę",
+				"priceRange": "Cena musi się znajdować w przedziale od 0 do 20000000"
+			}
+		}
+	},
+	"client": {
+		"fields": {
+			"firstName": "Imię",
+			"lastName": "Nazwisko",
+			"email": "Email",
+			"telNumber": "Numer telefonu",
+			"firstname": "client.fields.firstname"
+		},
+		"list": {
+			"title": "Klienci",
+			"addNew": "Dodaj nowego klienta",
+			"noData": "Brak klientów w bazie",
+			"pageTitle": "Lista klientów"
+		},
+		"form": {
+			"purchased-flats": {
+				"pageTitle": "Zakupione mieszkania",
+				"noData": "Klient nie ma przypisanych żadnych mieszkań."
+			},
+			"add": {
+				"pageTitle": "Dodawanie klienta",
+				"btnLabel": "Dodaj klienta",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano klienta"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edycja klienta",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano klienta"
+				}
+			},
+			"details": {
+				"pageTitle": "Szczegóły klienta"
+			}
+		},
+		"purchased-flats": {
+			"pageTitle": "client.purchased-flats.pageTitle"
+		}
+	},
+	"flat": {
+		"fields": {
+			"street": "Ulica",
+			"buildingNumber": "Numer budynku",
+			"flatNumber": "Numer mieszkania",
+			"devState": "Stan deweloperski"
+		},
+		"list": {
+			"title": "Mieszkania",
+			"addNew": "Dodaj nowe mieszkanie",
+			"noData": "Brak mieszkań w bazie",
+			"pageTitle": "Lista mieszkań"
+		},
+		"form": {
+			"buyers": {
+				"pageTitle": "Kupcy",
+				"noData": "Mieszkanie nie ma przypisanych żadnych klientów."
+			},
+			"add": {
+				"pageTitle": "Dodawanie mieszkania",
+				"btnLabel": "Dodaj mieszkanie",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano mieszkanie"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edycja mieszkania",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano mieszkanie"
+				}
+			},
+			"details": {
+				"pageTitle": "Szczegóły mieszkania"
+			}
+		}
+	},
+	"purchase": {
+		"fields": {
+			"client": "Klient",
+			"flat": "Mieszkanie",
+			"date": "Data Zakupu",
+			"price": "Cena"
+		},
+		"list": {
+			"title": "Zakupy",
+			"addNew": "Dodaj nowy zakup",
+			"noData": "Brak zakupów mieszkań w bazie",
+			"pageTitle": "Lista zakupów mieszkań"
+		},
+		"form": {
+			"obligatoryFields": {
+				"client": "Klient *",
+				"flat": "Mieszkanie *",
+				"date": "Data Zakupu *",
+				"price": "Cena *"
+			},
+			"add": {
+				"pageTitle": "Dodawanie zakupu",
+				"btnLabel": "Dodaj zakup",
+				"defaultOptions": {
+					"client": "-- Wybierz Klienta --",
+					"flat": "-- Wybierz Mieszkanie --"
+				},
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano zakup"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edycja zakupu",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano zakup"
+				}
+			},
+			"details": {
+				"pageTitle": "Szczegóły zakupu"
+			}
+		}
+	}
+}

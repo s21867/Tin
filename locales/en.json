@@ -1,0 +1,179 @@
+{
+	"main-page": {
+		"content": "Main Page"
+	},
+	"nav": {
+		"main-page": "Main Page",
+		"clients": "Clients",
+		"flats": "Flats",
+		"purchase-History": "Purchase History"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"table-head": "actions",
+			"return": "Return",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		},
+		"validationMessage": {
+			"fieldRequired": "Field is required",
+			"summary": "Form contains errors",
+			"client": {
+				"mobilePhone": "Telephone number is not valid",
+				"mobilePhoneRange": "Field should contain from 9 to 12 characters",
+				"email": "Email adress is not valid",
+				"emailRange": "Field should contain from 2 to 50 characters",
+				"nameRange": "Field should contain from 2 to 20 characters",
+				"lastNameRange": "Field should contain from 2 to 20 characters"
+
+			},
+			"flat": {
+				"streetRange": "Field should contain from 2 to 20 characters",
+				"buildingRange": "Field should contain from 1 to 3 characters",
+				"buildingNumber": "Field must contain a number",
+				"flatNumber": "Field must contain a number",
+				"flatRange": "Number must be in range of 1 to 999",
+				"devState": "Field must stay as a checkbox"
+			},
+			"purchase": {
+				"clientNotSelected": "Please select a client",
+				"flatNotSelected": "Please select a flat",
+				"date": "Field should contain date in a yyyy-MM-dd format",
+				"dateIfAfter": "Date cannot be from the future",
+				"price": "Price is invalid",
+				"priceRange": "Price must be in range of 0 to 20000000"
+			}
+		}
+	},
+	"client": {
+		"fields": {
+			"firstName": "First name",
+			"lastName": "Last name",
+			"email": "Email",
+			"telNumber": "Telephone number"
+		},
+		"list": {
+			"title": "Clients",
+			"addNew": "Add new client",
+			"noData": "No clients in database",
+			"pageTitle": "List of clients"
+		},
+		"form": {
+			"purchased-flats": {
+				"pageTitle": "Purchased flats",
+				"noData": "Client has no flats assigned."
+			},
+			"add": {
+				"pageTitle": "Adding a new client",
+				"btnLabel": "Add the client",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new client has been successfully created"
+				}
+			},
+			"edit": {
+				"pageTitle": "Editing a client",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The client has been successfully updated"
+				}
+			},
+			"details": {
+				"pageTitle": "Client's details"
+			}
+		}
+	},
+	"flat": {
+		"fields": {
+			"street": "Street",
+			"buildingNumber": "Building number",
+			"flatNumber": "Flat number",
+			"devState": "Developer state"
+		},
+		"list": {
+			"title": "Flats",
+			"addNew": "Add new flat",
+			"noData": "No flats in database.",
+			"pageTitle": "List of flats"
+		},
+		"form": {
+			"buyers": {
+				"pageTitle": "Buyers",
+				"noData": "Flat has no buyers assigned."
+			},
+			"add": {
+				"pageTitle": "Adding a new flat",
+				"btnLabel": "Add the flat",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new flat has been successfully created"
+				}
+			},
+			"edit": {
+				"pageTitle": "Editing a flat",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The flat has been successfully updated"
+				}
+			},
+			"details": {
+				"pageTitle": "Flat's details"
+			}
+		}
+	},
+	"purchase": {
+		"fields": {
+			"client": "Client",
+			"flat": "Flat",
+			"date": "Date of purchase",
+			"price": "Price"
+		},
+		"list": {
+			"title": "Purchases",
+			"addNew": "Add new purchase",
+			"noData": "No purchases in database.",
+			"pageTitle": "List of purchases"
+		},
+		"form": {
+			"obligatoryFields": {
+				"client": "Client *",
+				"flat": "Flat *",
+				"date": "Date of purchase *",
+				"price": "Price *"
+			},
+			"add": {
+				"pageTitle": "Adding a new purchase",
+				"btnLabel": "Add the purchase",
+				"defaultOptions": {
+					"client": "-- Choose Client --",
+					"flat": "-- Choose Flat --"
+				},
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new purchase has been successfully created"
+				}
+			},
+			"edit": {
+				"pageTitle": "Editing a purchase",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The purchase has been successfully updated"
+				}
+			},
+			"details": {
+				"pageTitle": "Purchase's details"
+			}
+		}
+	}
+}
